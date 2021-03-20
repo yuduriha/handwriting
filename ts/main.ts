@@ -1,6 +1,8 @@
 let canvas:HTMLCanvasElement;
 let context:CanvasRenderingContext2D|null;
 let oldTouch = {x:0, y:0};
+let penSize: number;
+let PEN_SIZE_TABEL = [5,10,15];
 window.onload = () => {
 	canvas = <HTMLCanvasElement>document.getElementById("canvas-handwriting");
 	context = canvas.getContext('2d'),
@@ -17,13 +19,15 @@ function addTouchEvent() : void {
 		if(!!touch) {
 			oldTouch.x = touch.pageX;
 			oldTouch.y = touch.pageY;
+			let penSizeType = <HTMLSelectElement>document.getElementById("select-pen-size");
+			penSize = PEN_SIZE_TABEL[+penSizeType.value];
 		}
 	}, {passive: false});
 	document.addEventListener('touchmove', function(event: TouchEvent) {
 		event.preventDefault();
 		let touch = event.touches[0];
 		if(!!touch && !!context) {
-			drawLine(context, {x: oldTouch.x, y: oldTouch.y}, {x: touch.pageX, y: touch.pageY}, {lineSize: 10})
+			drawLine(context, {x: oldTouch.x, y: oldTouch.y}, {x: touch.pageX, y: touch.pageY}, {lineSize: penSize})
 			oldTouch.x = touch.pageX;
 			oldTouch.y = touch.pageY;
 		}

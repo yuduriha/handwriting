@@ -2,6 +2,8 @@
 var canvas;
 var context;
 var oldTouch = { x: 0, y: 0 };
+var penSize;
+var PEN_SIZE_TABEL = [5, 10, 15];
 window.onload = function () {
     canvas = document.getElementById("canvas-handwriting");
     context = canvas.getContext('2d'),
@@ -14,13 +16,15 @@ function addTouchEvent() {
         if (!!touch) {
             oldTouch.x = touch.pageX;
             oldTouch.y = touch.pageY;
+            var penSizeType = document.getElementById("select-pen-size");
+            penSize = PEN_SIZE_TABEL[+penSizeType.value];
         }
     }, { passive: false });
     document.addEventListener('touchmove', function (event) {
         event.preventDefault();
         var touch = event.touches[0];
         if (!!touch && !!context) {
-            drawLine(context, { x: oldTouch.x, y: oldTouch.y }, { x: touch.pageX, y: touch.pageY }, { lineSize: 10 });
+            drawLine(context, { x: oldTouch.x, y: oldTouch.y }, { x: touch.pageX, y: touch.pageY }, { lineSize: penSize });
             oldTouch.x = touch.pageX;
             oldTouch.y = touch.pageY;
         }
