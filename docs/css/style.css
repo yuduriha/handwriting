@@ -1,0 +1,19 @@
+body {
+	overflow: scroll;
+}
+#prt-canvas {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+#header_button {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+#btn-reset-canvas {
+	margin: 5px;
+	width: 80px;
+	height: 80px;
+	font-size: 16px;
+}

@@ -1,1 +1,5 @@
-# handwriting-
+# handwriting
+手書き用メモツール
+
+# トランスパイル
+1ファイルのつもりなので `tsc` のみ  
